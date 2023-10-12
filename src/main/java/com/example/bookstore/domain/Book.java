@@ -3,16 +3,31 @@ package com.example.bookstore.domain;
 import java.io.Serializable;
 import java.util.Objects;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Book implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "i_id_book")
 	private Integer id;
+	@Column(name = "s_title_book")
 	private String title;
+	@Column(name = "s_authorname_book")
 	private String authorName;
+	@Column(name = "s_text_book")
 	private String text;
+	@OneToMany
+	@JoinColumn(name = "i_category_category")
+	private Category category;
 
 	public Book() {
 		super();
@@ -56,6 +71,14 @@ public class Book implements Serializable {
 
 	public void setText(String text) {
 		this.text = text;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
 	@Override

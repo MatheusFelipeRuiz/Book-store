@@ -4,10 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+
+@Entity(name = "tbl_category")
 public class Category {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "i_id_category")
 	private Integer id;
+	@Column(name = "s_name_category")
 	private String name;
+	@Column(name = "s_description_category")
 	private String description;
+	@OneToMany(mappedBy = "Category")
 	private List<Book> listBooks = new ArrayList<>();
 
 	public Category() {
