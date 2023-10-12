@@ -1,8 +1,14 @@
 package com.example.bookstore.domain;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Book {
+import jakarta.persistence.Entity;
+
+@Entity
+public class Book implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String title;
 	private String authorName;
