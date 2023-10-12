@@ -9,9 +9,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToOne;
 
-@Entity
+@Entity(name = "tbl_book")
 public class Book implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -25,7 +25,7 @@ public class Book implements Serializable {
 	private String authorName;
 	@Column(name = "s_text_book")
 	private String text;
-	@OneToMany
+	@ManyToOne
 	@JoinColumn(name = "i_category_category")
 	private Category category;
 
@@ -33,12 +33,13 @@ public class Book implements Serializable {
 		super();
 	}
 
-	public Book(Integer id, String title, String authorName, String text) {
+	public Book(Integer id, String title, String authorName, String text, Category category) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.authorName = authorName;
 		this.text = text;
+		this.category = category;
 	}
 
 	public Integer getId() {

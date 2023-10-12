@@ -21,7 +21,7 @@ public class Category {
 	private String name;
 	@Column(name = "s_description_category")
 	private String description;
-	@OneToMany(mappedBy = "Category")
+	@OneToMany(mappedBy = "category")
 	private List<Book> listBooks = new ArrayList<>();
 
 	public Category() {
