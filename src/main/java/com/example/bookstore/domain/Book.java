@@ -3,6 +3,8 @@ package com.example.bookstore.domain;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,6 +27,7 @@ public class Book implements Serializable {
 	private String authorName;
 	@Column(name = "s_text_book")
 	private String text;
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "i_category_category")
 	private Category category;
