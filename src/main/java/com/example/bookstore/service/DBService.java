@@ -12,7 +12,7 @@ import com.example.bookstore.repositories.BookRepository;
 import com.example.bookstore.repositories.CategoryRepository;
 
 @Service
-@Profile("test")
+@Profile("dev")
 public class DBService {
 	@Autowired
 	private CategoryRepository categoryRep;
