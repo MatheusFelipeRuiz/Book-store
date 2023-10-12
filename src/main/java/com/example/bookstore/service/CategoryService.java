@@ -14,10 +14,11 @@ public class CategoryService {
 
 	@Autowired
 	private CategoryRepository categoryRep;
-	
-	public Category findById(@PathVariable Integer id){
+
+	public Category findById(@PathVariable Integer id) {
 		Optional<Category> obj = categoryRep.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new com.example.bookstore.service.exceptions.ObjectNotFoundException(
+				"Objeto não encontrado, ID:  " + id + " Categoria: " + Category.class.getName()));
 	}
 
 }
