@@ -36,4 +36,12 @@ public class CategoryService {
 		obj.setId(null);
 		return categoryRep.save(obj);
 	}
+
+	public Category update(Integer id, CategoryDTO obj) {
+		Category category = new Category();
+		category.setId(obj.getId());
+		category.setName(obj.getName());
+		category.setDescription(obj.getDescription());
+		return categoryRep.save(category);
+	}
 }
