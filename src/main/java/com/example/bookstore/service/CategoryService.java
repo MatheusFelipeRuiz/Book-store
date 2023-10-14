@@ -12,7 +12,7 @@ import com.example.bookstore.domain.Category;
 import com.example.bookstore.dtos.CategoryDTO;
 import com.example.bookstore.repositories.CategoryRepository;
 import com.example.bookstore.service.exceptions.ObjectNotFoundException;
-
+import com.example.bookstore.service.exceptions.DataIntegrityViolationException;
 @Service
 public class CategoryService {
 
@@ -48,6 +48,10 @@ public class CategoryService {
 
 	public void delete(Integer id) {
 		findById(id);
-		categoryRep.deleteById(id);
+		try {
+			categoryRep.deleteById(id);
+		} catch (org.springframework.dao.DataIntegrityViolationException e) {
+			throw new DataIntegrityViolationException("Objeto não pode ser deletado, categoria possui livros associados");
+		}
 	}
 }
