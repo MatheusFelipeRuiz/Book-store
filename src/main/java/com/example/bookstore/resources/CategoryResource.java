@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,9 @@ import com.example.bookstore.domain.Category;
 import com.example.bookstore.dtos.CategoryDTO;
 import com.example.bookstore.service.CategoryService;
 
+import jakarta.validation.Valid;
+
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/categorias")
 public class CategoryResource {
@@ -33,26 +37,26 @@ public class CategoryResource {
 	}
 
 	@GetMapping
-	public ResponseEntity<List<CategoryDTO>> findAll(){
+	public ResponseEntity<List<CategoryDTO>> findAll() {
 		List<CategoryDTO> list = categoryService.findAll();
 		return ResponseEntity.ok().body(list);
 	}
-	
+
 	@PostMapping
-	public ResponseEntity<Category> save(@RequestBody Category obj){
-		obj =  categoryService.save(obj);
+	public ResponseEntity<Category> save(@Valid @RequestBody Category obj) {
+		obj = categoryService.save(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<CategoryDTO> update(@PathVariable Integer id, @RequestBody CategoryDTO obj){
+	public ResponseEntity<CategoryDTO> update(@PathVariable Integer id, @Valid @RequestBody CategoryDTO obj) {
 		Category category = categoryService.update(id, obj);
 		return ResponseEntity.ok().body(new CategoryDTO(category));
 	}
-	
+
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Void> delete(@PathVariable Integer id){
+	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		categoryService.delete(id);
 		return ResponseEntity.noContent().build();
 	}

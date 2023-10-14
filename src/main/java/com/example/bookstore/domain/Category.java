@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import org.hibernate.validator.constraints.Length;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity(name = "tbl_category")
 public class Category {
@@ -17,8 +20,12 @@ public class Category {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "i_id_category")
 	private Integer id;
+	@NotEmpty(message = "Campo Nome é obrigatório")
+	@Length(min = 3, max = 60, message = "Campo nome deve ter entre 10 e 60 caracteres" )
 	@Column(name = "s_name_category")
 	private String name;
+	@NotEmpty(message = "Campo Descrição é obrigatório")
+	@Length(min = 10, max = 100, message = "Campo descrição deve ter entre 10 e 100 caracteres")
 	@Column(name = "s_description_category")
 	private String description;
 	@OneToMany(mappedBy = "category")

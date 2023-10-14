@@ -20,7 +20,7 @@ public class DBService {
 	private BookRepository bookRep;
 	
 	public void generateDataBase() {
-		Category c1 = new Category(null, "TI", "Livros sobre tecnologia");
+		Category c1 = new Category(null, "T.I", "Livros sobre tecnologia");
 		Category c2 = new Category(null, "Animações","Livros de animes");
 		Category c3 = new Category(null, "Matemática", "Livros sobre conceitos matemáticos");
 		
