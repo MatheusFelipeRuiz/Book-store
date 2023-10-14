@@ -40,7 +40,7 @@ public class CategoryResource {
 	
 	@PostMapping
 	public ResponseEntity<Category> save(@RequestBody Category obj){
-//		obj =  categoryService.save(obj);
+		obj =  categoryService.save(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}

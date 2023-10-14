@@ -25,8 +25,24 @@ public class BookService {
 				("Livro não encontrado, ID: " + id + ", Livro: " + Book.class) );
 	}
 	
-	public List<Book> findAll(Integer id){
+	public List<Book> findAll(){
+		return bookRep.findAll();
+	}
+	
+	public List<Book> findAllByCategory(Integer id){
 		categoryService.findById(id);
 		return bookRep.findAllByCategory(id);
+	}
+
+	public Book update(Integer id, Book obj) {
+		Book newObj = findById(id);
+		updateData(newObj, obj);
+		return bookRep.save(newObj);
+	}
+	
+	private void updateData(Book newObj, Book obj) {
+		newObj.setText(obj.getText());
+		newObj.setTitle(obj.getTitle());
+		newObj.setAuthorName(obj.getAuthorName());
 	}
 }

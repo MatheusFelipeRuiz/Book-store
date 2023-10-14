@@ -39,6 +39,7 @@ public class CategoryService {
 	}
 
 	public Category update(Integer id, CategoryDTO obj) {
+		findById(id);
 		Category category = new Category();
 		category.setId(obj.getId());
 		category.setName(obj.getName());
